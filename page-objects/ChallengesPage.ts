@@ -28,38 +28,38 @@ export class ChallengesPage extends helperBase{
 
     async gotoProductFilteringChallenge(){
         const filterChallenge = this.page.locator('.MuiCard-root', {has: this.page.getByText('E-commerce Product Filtering & Search', {exact:true})});
-        await filterChallenge.click();
+        await filterChallenge.getByRole('button', {name:'View Challenge'}).click();   
     }
 
     async gotoRoleLoginChallenge(){
         const roleLoginChallenge =  this.page.locator('.MuiCard-root',{has: this.page.getByText('Role-Based Login Flow', {exact:true})})
-        await roleLoginChallenge.click();
+        await roleLoginChallenge.getByRole('button', {name:'View Challenge'}).click();   
     }
 
     async goToEnd2EndChallenge(){
         const e2eChallenge =  this.page.locator('.MuiCard-root',{has: this.page.getByText('E-commerce End-to-End Product Purchasing Flow', {exact:true})})
-        await e2eChallenge.click();
+        await e2eChallenge.getByRole('button', {name:'View Challenge'}).click();   
     }
 
     async goToSocialChallenge(){
         const socialMediaChallenge =  this.page.locator('.MuiCard-root',{has: this.page.getByText('Social Media Feed Interaction Challenge', {exact:true})})
-        socialMediaChallenge.click();
+        await socialMediaChallenge.getByRole('button', {name:'View Challenge'}).click();   
 
     }
 
     async goToShadowDOMChallenge(){
         const shadowDOMChallenge = this.page.locator('.MuiCard-root', {has: this.page.getByText('Shadow DOM Login Form Interaction Challenge', {exact:true})});
-        shadowDOMChallenge.click();
+        await shadowDOMChallenge.getByRole('button', {name:'View Challenge'}).click();   
     }
 
     async goToSearchEngineChallenge(){
         const searchEngineChallenge = this.page.locator('.MuiCard-root', {has: this.page.getByText('Simple Search Engine UI Automation Challenge', {exact: true})});
-        searchEngineChallenge.click();
+        await searchEngineChallenge.getByRole('button', {name:'View Challenge'}).click();   
     }
 
     async goToJobAppChallenge(){
         const jobAppChallenge = this.page.locator('.MuiCard-root', {has: this.page.getByText('Job Application Form Automation Challenge', {exact:true})});
-        jobAppChallenge.click(); 
+        await jobAppChallenge.getByRole('button', {name:'View Challenge'}).click();   
     }
 
     //Just Checking
