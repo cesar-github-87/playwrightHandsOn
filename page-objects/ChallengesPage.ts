@@ -59,10 +59,10 @@ export class ChallengesPage extends helperBase{
 
     async goToJobAppChallenge(){
         const jobAppChallenge = this.page.locator('.MuiCard-root', {has: this.page.getByText('Job Application Form Automation Challenge', {exact:true})});
-        jobAppChallenge.click();
+        jobAppChallenge.click(); 
     }
 
-
+    //Just Checking
 
 
 
