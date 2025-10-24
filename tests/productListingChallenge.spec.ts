@@ -9,14 +9,23 @@ test.beforeEach(async({page})=>{
 
 test ("Going to Product Listing Challenge page", async({page})=>{
 
-    let categoryInfo={
+    const categoryInfo={
             'Clothing': 9,
-            'Books': 0,
-            'Sports':0,
-            'Home':0,
-            'Electronics':0
+            'Books': 6,
+            'Sports':8,
+            'Home':7,
+            'Electronics':10
 
         }
+    
+    /*
+    console.log("MI OBJECTO DE REFERENCIA: ", baseInfo)
+    */
+    Object.keys(categoryInfo).forEach(key => {
+        console.log(categoryInfo[key as keyof typeof categoryInfo]);
+    });
+
+
     const pm = new PageManager(page);
     await page.waitForTimeout(1500);    
     await pm.challengesPages().goToProductListingChallenge();
@@ -25,12 +34,28 @@ test ("Going to Product Listing Challenge page", async({page})=>{
 
 
     const countedCategories = await pm.productListingChallengePage().countCategories()
-    
-    //countedCategories[categoryInfo]
+    console.log('Objeto referencia: ', categoryInfo)
+    console.log("Objeto leido desde pagina con mis conteos: ", countedCategories)
 
 
-   // console.log(await categories)
+    //SIN ADENTRARME EN MOSTRAR LAS DIFERENCIAS, COMPARO SI SOLAMENTE TIENEN LOS MISMOS VALORES Y REGRESO TRUE O FALSE
+    const cat1 = Object.keys(categoryInfo)
+    const cat2 = Object.keys(countedCategories)
     
+    let equalObjects = true
+    for(const c of cat1){
+        const expectedValue = categoryInfo[c as keyof typeof categoryInfo]
+        const actualValue = countedCategories[c]
+        if(expectedValue!== actualValue){
+            
+            equalObjects=false;
+            //break;
+        }
+        
+    }
+     //equalObjects=true;
+
+    expect(equalObjects).toBeTruthy()
 
 })
 

@@ -19,7 +19,7 @@ export class ChallengesPage extends helperBase{
     
 
     async goToProductListingChallenge(){
-        console.log(this.page.url())
+        //console.log(this.page.url())
         
         const listingChallenge = this.page.locator('.MuiCard-root', {has: this.page.getByText('E-commerce Product Listing & Pagination', {exact:true})});           
         await listingChallenge.getByRole('button', {name:'View Challenge'}).click();        

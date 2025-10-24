@@ -37,7 +37,7 @@ export class ProductListingPage extends helperBase{
                 await this.clickNextButton()
                 await this.page.waitForTimeout(1000)
                 buttonClass = await this.nextButton.getAttribute('class')
-                console.log("Boton status: ", await this.nextButton.isDisabled())
+                //console.log("Boton status: ", await this.nextButton.isDisabled())
           
             }
 
@@ -58,8 +58,8 @@ export class ProductListingPage extends helperBase{
                     counts[element] = 1;   // If new, set to 1
                 }
             }
-            //console.log(counts)
-            return counts
+           // console.log(counts)
+            return counts //Regreso el objeto llenado
           
 
     }
