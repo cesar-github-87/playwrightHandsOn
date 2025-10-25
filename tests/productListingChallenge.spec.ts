@@ -7,7 +7,7 @@ test.beforeEach(async({page})=>{
 })
 
 
-test ("Going to Product Listing Challenge page", async({page})=>{
+test ("PLP_001 - Count Products in each category", async({page})=>{
 
     const categoryInfo={
             'Clothing': 9,
@@ -56,6 +56,41 @@ test ("Going to Product Listing Challenge page", async({page})=>{
      //equalObjects=true;
 
     expect(equalObjects).toBeTruthy()
+
+})
+
+test('PLP_002- Finds specific product and identify its page', async({page})=>{
+    const targetProduct = "Speedo Swim Goggles"
+    const pm =  new PageManager(page)
+    await pm.challengesPages().goToProductListingChallenge()
+    await page.waitForTimeout(1500)    
+    
+
+    let pageProducts = await pm.productListingChallengePage().retrieveProducts()
+    let found = false
+    let pageNumber
+    console.log(pageProducts.length)
+
+    while(!found){
+        for(let i=0; i< pageProducts.length;i++){
+            
+            if(targetProduct === pageProducts[i]){            
+                found = true
+                pageNumber = await pm.productListingChallengePage().getCurrentPage()
+                console.log(`I've found "${targetProduct}" on page "${pageNumber}" in position "${i+1}"` )
+                break
+            }
+        
+              
+        }
+        await pm.productListingChallengePage().clickNextButton()
+        await page.waitForTimeout(1500)  
+        pageProducts = await pm.productListingChallengePage().retrieveProducts()
+    }
+
+    expect(found).toBeTruthy
+
+    
 
 })
 
