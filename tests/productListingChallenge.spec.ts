@@ -59,14 +59,17 @@ test ("PLP_001 - Count Products in each category", async({page})=>{
 
 })
 
+
 test('PLP_002- Finds specific product and identify its page', async({page})=>{
-    const targetProduct = "Speedo Swim Goggles"
+    const nextButton = page.getByRole("button", {name:'Next', exact:true})
+    const targetProduct = "Dyson V15 Detect Vacuum"
     const pm =  new PageManager(page)
     await pm.challengesPages().goToProductListingChallenge()
     await page.waitForTimeout(1500)    
     
 
     let pageProducts = await pm.productListingChallengePage().retrieveProducts()
+    
     let found = false
     let pageNumber
     console.log(pageProducts.length)
@@ -83,9 +86,19 @@ test('PLP_002- Finds specific product and identify its page', async({page})=>{
         
               
         }
-        await pm.productListingChallengePage().clickNextButton()
-        await page.waitForTimeout(1500)  
-        pageProducts = await pm.productListingChallengePage().retrieveProducts()
+        if(!found){
+            let buttonClass = await nextButton.getAttribute('class'); //reviso el atributo CLASS
+            if(buttonClass?.includes('Mui-disabled') ){
+                throw new Error('Test failed: Product not found');
+                break;
+            }
+            await pm.productListingChallengePage().clickNextButton()
+            await page.waitForTimeout(1500)  
+            pageProducts = await pm.productListingChallengePage().retrieveProducts()
+            
+        }
+        
+       
     }
 
     expect(found).toBeTruthy
@@ -94,3 +107,45 @@ test('PLP_002- Finds specific product and identify its page', async({page})=>{
 
 })
 
+test('PLP_003 - Find the Highest-rated product in each category', async({page})=>{
+    const baseRate={
+         
+            'Books': {'name': 'The Pragmatic Programmer', 'price': '$29.99', 'rating': 5 },
+            'Sports': { 'name': 'Wilson Pro Staff Tennis Racket','price': '$249.99','rating': 5},
+            'Home': { 'name': 'Samsung Smart Refrigerator', 'price': '$1799.99', 'rating': 5 },
+            'Clothing': { 'name': 'Nike Air Force 1 Sneakers', 'price': '$89.99', 'rating': 5 },
+            'Electronics': { 'name': 'Sony PlayStation 5', 'price': '$499.99', 'rating': 5 }       
+
+        
+
+    }
+
+    const pm = new PageManager(page);
+    await page.waitForTimeout(1500);
+    await pm.challengesPages().goToProductListingChallenge()
+    await page.waitForTimeout(2000);
+   // await pm.productListingChallengePage().getHighestRatingPerCategory()
+
+    const actualHigh = await pm.productListingChallengePage().getHighestRatingPerCategory()
+
+    for (const category in baseRate){
+        const expected = baseRate[category as keyof typeof baseRate]
+        const actual = actualHigh[category]
+
+        expect(actual.rating).toEqual(expected.rating)
+
+    }
+
+   
+  
+   
+})
+
+test('PLP_004 - Get the most expensive product in each catgory', async ({page})=>{
+    const pm = new PageManager(page)
+    await page.waitForTimeout(1500);
+    await pm.challengesPages().goToProductListingChallenge()
+    await page.waitForTimeout(1500);
+    const mostPricy = await pm.productListingChallengePage().getMostExpensivePerCategory();
+    console.log(mostPricy)
+})
