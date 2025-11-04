@@ -6,6 +6,7 @@ import { privateDecrypt } from 'crypto';
 export class ProductListingPage extends helperBase{
 
     private nextButton = this.page.getByRole("button", {name:'Next', exact:true})
+    private prevButton = this.page.getByRole("button", {name:'Prev', exact:true})
 
     constructor(page: Page){
         super(page);
@@ -21,6 +22,10 @@ export class ProductListingPage extends helperBase{
         
         await this.nextButton.click();
     
+    }
+
+    async clickPreviousButton(){
+        await this.prevButton.click()
     }
 
     async countCategories(){
@@ -211,26 +216,42 @@ export class ProductListingPage extends helperBase{
 
     }
         
-
+    
        
 
     
 
-    async navigateThroughPages(){
+    async navigateThroughAllPages(){
          let buttonClass = await this.nextButton.getAttribute('class'); //reviso el atributo CLASS
         
-            while (!buttonClass?.includes("Mui-disabled")){            //mientras no tenga el Mui-Disabled, hago lo siguiente
-              
-                console.log('IM IN - ', await this.getCurrentPage())
-                await this.page.waitForTimeout(1000)
-                await this.clickNextButton()
-                await this.page.waitForTimeout(1000)
-                buttonClass = await this.nextButton.getAttribute('class')
+            while (true){
+                
+                const buttonClass = await this.nextButton.getAttribute('class')                
+                const isLastPage = buttonClass?.includes("Mui-disabled");//mientras no tenga el Mui-Disabled, hago lo siguiente
+                
+                if (isLastPage) {
+                    console.log('Is last Page')
+                    break;
+                    
+                }
+                await this.page.waitForTimeout(1000);
+                console.log('Current Page":', await this.getCurrentPage())
+                await this.clickNextButton();                
+                await this.page.waitForTimeout(2000);
                 
           
             }
 
             return true
+
+    }
+
+    async navigateToPageNumber(pageNum: number){
+        //Navegar por todas las paginas y obtener cuantas son
+        //para asegurar que no estoy pidiendo ir a una pagina que no existe
+
+        const buttonNumber = this.page.getByRole('button', {name:`${[pageNum]}`})
+        await buttonNumber.click()
 
     }
 

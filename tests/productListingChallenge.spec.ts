@@ -149,3 +149,30 @@ test('PLP_004 - Get the most expensive product in each catgory', async ({page})=
     const mostPricy = await pm.productListingChallengePage().getMostExpensivePerCategory();
     console.log(mostPricy)
 })
+
+test('PLP_005 - Validate pagination controls', async({page})=>{    
+    const expectedProducts = ['Zero to One',  'Haier 1.5 Ton Split AC',  'Instant Pot Duo',  'Apple Watch Series 9',  'Microsoft Xbox Series X','The North Face Jacket',  'Everlast Boxing Gloves',  'The Subtle Art of Not Giving a F*ck',  'Bose QuietComfort 45',  'Uniqlo Ultra Light Down Jacket']
+    console.log('Unsorted:', expectedProducts)
+    console.log('Sorted expected:' , expectedProducts.sort())
+    const pm = new PageManager(page)
+    await page.waitForTimeout(1500);
+    await pm.challengesPages().goToProductListingChallenge()
+    await pm.productListingChallengePage().navigateToPageNumber(3)
+
+    const listedProducts = await pm.productListingChallengePage().retrieveProducts()
+    console.log('Unsorted actual: ', listedProducts)
+    console.log('Sorted actual: ', listedProducts.sort())
+
+    expect (listedProducts).toEqual(expectedProducts)
+
+    await pm.productListingChallengePage().clickNextButton()
+    let paginationButton = page.locator('.MuiPaginationItem-rounded.Mui-selected')
+    console.log("boton: ", await paginationButton.textContent())
+    expect(paginationButton).toContainText("4")
+
+    await pm.productListingChallengePage().clickPreviousButton()
+    paginationButton = page.locator('.MuiPaginationItem-rounded.Mui-selected')
+    console.log('new boton: ',await paginationButton.textContent())
+    expect(paginationButton).toContainText("3")
+
+})
