@@ -33,7 +33,8 @@ test("LF_001 - Empty fields validation", async({page})=>{
     await expect(errorMessage).toContainText("Both fields are required.")
     await page.waitForTimeout(1500);
 
-    page.reload();
+    await page.goto('https://www.cnarios.com/challenges')
+    await pm.challengesPages().gotoRoleLoginChallenge();
     await page.waitForTimeout(1500);
 
     await pm.loginChallengePage().loginFormFill("user","");
@@ -45,8 +46,8 @@ test("LF_001 - Empty fields validation", async({page})=>{
     await expect(errorMessage).toContainText("Both fields are required.")
 
     await page.waitForTimeout(1500);
-
-    await page.reload();
+    await page.goto('https://www.cnarios.com/challenges')   
+    await pm.challengesPages().gotoRoleLoginChallenge();
     await page.waitForTimeout(1500);
 
     await pm.loginChallengePage().loginFormFill("","password");

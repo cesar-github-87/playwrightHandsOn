@@ -68,8 +68,9 @@ test('PLP_002- Finds specific product and identify its page', async({page})=>{
     await page.waitForTimeout(1500)    
     
 
-    let pageProducts = await pm.productListingChallengePage().retrieveProducts()
-    
+    let listedProducts = await pm.productListingChallengePage().retrieveProducts()
+    let pageProducts = await listedProducts.locator('h6.font-semibold').allTextContents()
+
     let found = false
     let pageNumber
     console.log(pageProducts.length)
@@ -94,7 +95,8 @@ test('PLP_002- Finds specific product and identify its page', async({page})=>{
             }
             await pm.productListingChallengePage().clickNextButton()
             await page.waitForTimeout(1500)  
-            pageProducts = await pm.productListingChallengePage().retrieveProducts()
+            listedProducts = await pm.productListingChallengePage().retrieveProducts()
+            pageProducts = await listedProducts.locator('h6.font-semibold').allTextContents()
             
         }
         
@@ -152,18 +154,19 @@ test('PLP_004 - Get the most expensive product in each catgory', async ({page})=
 
 test('PLP_005 - Validate pagination controls', async({page})=>{    
     const expectedProducts = ['Zero to One',  'Haier 1.5 Ton Split AC',  'Instant Pot Duo',  'Apple Watch Series 9',  'Microsoft Xbox Series X','The North Face Jacket',  'Everlast Boxing Gloves',  'The Subtle Art of Not Giving a F*ck',  'Bose QuietComfort 45',  'Uniqlo Ultra Light Down Jacket']
-    console.log('Unsorted:', expectedProducts)
-    console.log('Sorted expected:' , expectedProducts.sort())
+   // console.log('Unsorted:', expectedProducts)
+    //console.log('Sorted expected:' , expectedProducts.sort())
+
     const pm = new PageManager(page)
     await page.waitForTimeout(1500);
     await pm.challengesPages().goToProductListingChallenge()
     await pm.productListingChallengePage().navigateToPageNumber(3)
 
     const listedProducts = await pm.productListingChallengePage().retrieveProducts()
-    console.log('Unsorted actual: ', listedProducts)
-    console.log('Sorted actual: ', listedProducts.sort())
+    console.log('Unsorted actual: ', await listedProducts.locator('h6.font-semibold').allTextContents())
+    console.log('Sorted actual: ', (await listedProducts.locator('h6.font-semibold').allTextContents()).sort())
 
-    expect (listedProducts).toEqual(expectedProducts)
+    expect ((await listedProducts.locator('h6.font-semibold').allTextContents()).sort()).toEqual(expectedProducts.sort())
 
     await pm.productListingChallengePage().clickNextButton()
     let paginationButton = page.locator('.MuiPaginationItem-rounded.Mui-selected')
@@ -175,4 +178,63 @@ test('PLP_005 - Validate pagination controls', async({page})=>{
     console.log('new boton: ',await paginationButton.textContent())
     expect(paginationButton).toContainText("3")
 
+})
+
+test('PLP_006 - Verify Product Card Details Format', async({page})=>{
+    const pm = new PageManager(page)
+
+    await pm.challengesPages().goToProductListingChallenge()
+    await page.waitForTimeout(1500)
+
+    const nextButton = page.getByRole("button", {name:'Next', exact:true})
+
+    while(true){
+        const pageProducts = await pm.productListingChallengePage().retrieveProducts()
+
+        const productCount = await pageProducts.count()
+        //console.log(`Hay ${productCount} Productos `)
+
+        for (let i = 0; i < productCount; i++) {
+
+            const currentProduct = pageProducts.nth(i)
+
+            let productName = await currentProduct.locator('.MuiTypography-h6.font-semibold').textContent()
+            let productPrice = await currentProduct.locator('.MuiTypography-h6.text-green-600').textContent()
+            let productPriceValue = Number(productPrice?.replace('$','').trim())
+            let productCat = await currentProduct.locator('.MuiTypography-body2').filter({ hasText: 'Category:' }).textContent()
+            let productCatValue = productCat?.replace('Category:','').trim()
+            let productStars = await currentProduct.locator('.MuiRating-iconFilled').count()
+            let starsStatus = await currentProduct.locator('.MuiRating-root').getAttribute('class')
+
+            expect(starsStatus).toContain('Mui-readOnly')
+            expect(productPrice).toContain('$')
+            expect(productName).not.toBe('')
+            expect(productCatValue).not.toBe('')
+            expect(typeof productPriceValue).toBe('number')
+           
+        }
+
+
+        const buttonClass = await nextButton.getAttribute('class')
+       /* console.log('------------------------------')
+        console.log('CLASE DEL BOTON: ', buttonClass)*/
+        const isLastPage = buttonClass?.includes("Mui-disabled");
+
+        if (isLastPage) {
+            console.log('Is last Page')
+            break;
+
+        }
+
+
+        await page.waitForTimeout(1000);
+        await pm.productListingChallengePage().clickNextButton();
+        await page.waitForTimeout(2000);
+
+
+ 
+    }
+
+   
+   
 })

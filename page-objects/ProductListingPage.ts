@@ -66,10 +66,10 @@ export class ProductListingPage extends helperBase{
     }
     
     async retrieveProducts(){
-        let products:string[]=[]
-
-        products = await this.page.locator('.MuiCardContent-root').locator('h6.font-semibold').allTextContents()
-        return products
+       // let products:string[]=[]
+        const products2 = this.page.locator('.MuiCardContent-root')
+       // products = await this.page.locator('.MuiCardContent-root').locator('h6.font-semibold').allTextContents()
+        return products2                                         //
       //  console.log(products)
     }
 
