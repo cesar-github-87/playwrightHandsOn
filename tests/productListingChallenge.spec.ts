@@ -181,6 +181,7 @@ test('PLP_005 - Validate pagination controls', async({page})=>{
 })
 
 test('PLP_006 - Verify Product Card Details Format', async({page})=>{
+    
     const pm = new PageManager(page)
 
     await pm.challengesPages().goToProductListingChallenge()
