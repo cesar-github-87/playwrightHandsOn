@@ -51,12 +51,92 @@ test('SMF_001 - Like a post and verify count + icon', async({page})=>{
             const filledHeart = await cards.likeButton.locator('svg').getAttribute('class')
             console.log("Atributos ", filledHeart)
 
+            //FALTA VERIFICAR LA CLASE
+            await expect(cards.likeButton).toHaveScreenshot()
+
+
             //USAR VALIDACION DE IMGAGEN JUNTO CON LA DE CLASS!
         }
+      
        
-       
+    }    
+})
+
+test("SMF_002 -Unlike a previously liked post ", async({page})=>{
+/**
+ * Click the like button again to unlike a post and confirm count decreases
+
+    Steps to Execute:
+    Locate a post that is already liked
+    Click the filled heart icon
+    Verify like count decreases by 1
+    Verify heart icon returns to outlined state*/ 
+
+    const pm = new PageManager(page)
+    let entries = await pm.socialMediaPages().getPostsInfo()
+
+    /*Click Like on all entries*/
+  
+    
+
+    for(const post of entries){
+        await post.likeButton.click()        
+
     }
 
-
     
+    let likedEntry =  page.locator('.flex').locator('.MuiPaper-root.MuiPaper-rounded').getByRole("button").nth(0)
+  
+    /**  *Find the first post that has a heart filled    */
+    expect(await likedEntry.locator('svg').getAttribute("class")).toContain("MuiSvgIcon-colorError")
+
+    let likesText = await page.locator('.flex').locator('.MuiPaper-root.MuiPaper-rounded').locator('.MuiTypography-body1').nth(0).textContent()
+    let likesNumber = Number(likesText?.replace("likes", '').trim())
+    console.log(likesNumber)
+
+    await likedEntry.click()
+    likesText = await page.locator('.flex').locator('.MuiPaper-root.MuiPaper-rounded').locator('.MuiTypography-body1').nth(0).textContent()
+    let dislikedNumber = Number(likesText?.replace("likes", '').trim())
+
+    expect(dislikedNumber).toBe(likesNumber-1)
+    await expect(likedEntry).toHaveScreenshot()
+
+
+
+})
+
+
+
+
+test("SMF_003 - Generate notification when liking a post", async({page})=>{
+    const pm = new PageManager(page)
+
+    /**
+     *  Test Steps & Details
+        Description:
+        Check that a new notification is created after liking a post
+
+        Steps to Execute:
+        Click like on a post
+        Check notification badge shows count increment
+        Open notifications modal
+        Verify new notification text is displayed with a dot
+
+        -----------------------------------------------------
+        verificar que de inicio no exista el punto rojo en la campana
+        dar like a un post
+        verificar que aparezca un punto rojo con un numero 1 en el 
+        dar like al mismo post
+     *  verificar que aparezca un punto rojo con un numero 1 en el 
+        
+     */
+
+
+    const notiBell = page.getByRole
+
+
+
+
+
+
 })
