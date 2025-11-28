@@ -30,4 +30,9 @@ export class SocialMedia extends helperBase{
 
     }
 
+
+    async getNotificationTexts(){
+       return this.page.locator(".shadow-lg")
+    }
+
 }

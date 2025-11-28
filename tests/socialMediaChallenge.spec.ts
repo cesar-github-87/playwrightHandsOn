@@ -120,23 +120,104 @@ test("SMF_003 - Generate notification when liking a post", async({page})=>{
         Click like on a post
         Check notification badge shows count increment
         Open notifications modal
-        Verify new notification text is displayed with a dot
-
-        -----------------------------------------------------
-        verificar que de inicio no exista el punto rojo en la campana
-        dar like a un post
-        verificar que aparezca un punto rojo con un numero 1 en el 
-        dar like al mismo post
-     *  verificar que aparezca un punto rojo con un numero 1 en el 
-        
+        Verify new notification text is displayed with a dot        
      */
 
 
-    const notiBell = page.getByRole
+    const notiBell = page.locator(".MuiIconButton-root").locator(".MuiBadge-root")
+    //
+
+    const posts = await pm.socialMediaPages().getPostsInfo() 
+    
+     //Like one post, check heart is filled using its css, and notif counter is 1   
+    await posts[1].likeButton.click()
+    let heartColor = await posts[1].likeButton.locator('svg').evaluate((element)=>{
+        return window.getComputedStyle(element).getPropertyValue('color')
+    })
+
+    console.log(heartColor)
+    expect.soft(heartColor, `${heartColor} value is not correct`).toContain("211, 47, 47")
+    expect.soft(await notiBell.locator(".MuiBadge-badge").textContent()).toBe('1')    
+    
+    //Dislike one post, check heart is NOT filled using its css, and notif counter is 2
+    await posts[1].likeButton.click()
+   
+    heartColor = await posts[1].likeButton.locator('svg').evaluate((element)=>{
+        return window.getComputedStyle(element).getPropertyValue('color')
+    })
+    console.log(heartColor)
+    expect.soft(heartColor, `${heartColor} value is not correct`).toContain("0, 0, 0")
+    expect.soft(await notiBell.locator(".MuiBadge-badge").textContent()).toBe('2')   
+
+    
+    //VERIFY NOTIFICATION BACKGROUND COLOR
+    const bellDot = notiBell.locator('.MuiBadge-badge')
+    let notifBGColor = await bellDot.evaluate((element)=>{
+        return window.getComputedStyle(element).getPropertyValue('background-color')
+    })
+    expect.soft(notifBGColor, `${notifBGColor} value is not correct`).toContain("211, 47, 47")
+
+
+})
+
+
+test("SMF004_Mark Notifications as Seen", async({page})=>{
+    /*
+    Click like on a post to generate notification
+    Verify badge shows count
+    Open notifications modal
+    Verify notification dot is removed and text is gray
+    Close modal and confirm badge count is 0
+    */
+    const pm = new PageManager(page)
+    const posts = await pm.socialMediaPages().getPostsInfo()
+
+    await posts[1].likeButton.click()
+
+    const notiBell = page.locator(".MuiIconButton-root").locator(".MuiBadge-root")
+
+    expect(await notiBell.locator(".MuiBadge-badge").textContent()).toBe("1")
+
+    await notiBell.click()
+
+    expect(await notiBell.locator(".MuiBadge-badge").getAttribute("class")).toContain("MuiBadge-invisible")
+
+    const texts = (await pm.socialMediaPages().getNotificationTexts()).locator('.MuiTypography-body2')
+   
+    let textColor =  await texts.evaluate((element)=>{
+        return window.getComputedStyle(element).getPropertyValue('color')
+    })
+
+    console.log(textColor)
+
+    expect(textColor).toContain("0.707 0.022 261.325")
+
+    await page.keyboard.press('Escape')
+    
+
+    expect(await notiBell.locator(".MuiBadge-badge").textContent()).toBe('0')
+
+
+})
+
+test("SMF005_Like Multiple Posts Independently", async ({page})=>{
+    /**Like the first post
+        Like the second post
+        Verify both posts show incremented counts and filled hearts
+        Verify other posts remain unaffected */
+
+    const pm = new PageManager(page)
+    const posts = await pm.socialMediaPages().getPostsInfo()
+    
+    let likesText = await posts[0].likesText.textContent()    
+    let number = likesText?.replace("likes", "").trim()
+
+    await posts[0].likeButton.click()
+    await posts[1].likeButton.click()
 
 
 
 
 
-
+        
 })
