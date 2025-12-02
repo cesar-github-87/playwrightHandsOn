@@ -8,7 +8,7 @@ import { E2EPage } from "./e2ePage";
 import { LoginPage } from "./loginChallengePage";
 import { FilterSearchPage } from "./filterSearchPage";
 import { SocialMedia} from "./socialMediaPage";
-
+import { SearchEngine } from "./SearchEnginePage";
 
 
 
@@ -21,6 +21,7 @@ export class PageManager{
     private readonly loginChallPage: LoginPage;
     private readonly filteringPage: FilterSearchPage
     private readonly socialMediaPage: SocialMedia;
+    private readonly simpleSearchEnginePage: SearchEngine;
 
     constructor(page:Page){
         this.page = page;
@@ -29,7 +30,8 @@ export class PageManager{
         this.e2ePage = new E2EPage(this.page);
         this.loginChallPage = new LoginPage(this.page);
         this.filteringPage = new FilterSearchPage(this.page);
-        this.socialMediaPage = new SocialMedia(this.page)
+        this.socialMediaPage = new SocialMedia(this.page);
+        this.simpleSearchEnginePage =  new SearchEngine(this.page);
 
     }
 
@@ -56,6 +58,10 @@ export class PageManager{
 
     socialMediaPages(){
         return this.socialMediaPage;
+    }
+
+    searchEnginePage(){
+        return this.simpleSearchEnginePage;
     }
 
 }
