@@ -30,6 +30,7 @@ pipeline {
                 dir('/var/jenkins_home/workspace/PW-CNARIOS-TESTS') {
                     sh '''
                     docker run --rm \
+                        -e CI=true \
                         -v $(pwd)/playwright-report:/cnarios/playwright-report \
                         playwright-tests \
                         npx playwright test --reporter=html  # ← SIMPLE!

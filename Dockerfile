@@ -4,5 +4,6 @@ WORKDIR /cnarios
 COPY . /cnarios/    
 		
 RUN npm install --force  
-RUN npx playwright install  
+RUN npx playwright install 
+ENV CI=true
 CMD ["npx", "playwright", "test", "--reporter=html"]
