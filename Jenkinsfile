@@ -26,17 +26,50 @@ pipeline {
         }
         
         stage('Run Tests') {
-            steps {
-                dir('/var/jenkins_home/workspace/PW-CNARIOS-TESTS') {
-                    sh '''
-                    docker run --rm \
-                        -e CI=true \
-                        -v $(pwd)/playwright-report:/cnarios/playwright-report \
-                        playwright-tests \
-                        npx playwright test --reporter=html  # ← SIMPLE!
-                    '''
+            paralell{
+                stage('Chrome Tests'){
+                    steps {
+                        dir('/var/jenkins_home/workspace/PW-CNARIOS-TESTS') {
+                        sh '''
+                        docker run --rm \
+                            -e CI=true \
+                            -v $(pwd)/playwright-report:/cnarios/playwright-report \
+                            playwright-tests \
+                            npx playwright test --project=chromium --reporter=html  # ← SIMPLE!
+                        '''
+                        }
+                    }
                 }
+                stage('Firefox Tests'){
+                    steps {
+                        dir('/var/jenkins_home/workspace/PW-CNARIOS-TESTS') {
+                        sh '''
+                        docker run --rm \
+                            -e CI=true \
+                            -v $(pwd)/playwright-report:/cnarios/playwright-report \
+                            playwright-tests \
+                            npx playwright test --project=firefox --reporter=html  # ← SIMPLE!
+                        '''
+                        }
+                    }
+                }
+                stage('Webkit Tests'){
+                    steps {
+                        dir('/var/jenkins_home/workspace/PW-CNARIOS-TESTS') {
+                        sh '''
+                        docker run --rm \
+                            -e CI=true \
+                            -v $(pwd)/playwright-report:/cnarios/playwright-report \
+                            playwright-tests \
+                            npx playwright test --project=webkit --reporter=html  # ← SIMPLE!
+                        '''
+                        }
+                    }
+                }
+                 
+
             }
+           
         }
         
         stage('Publish Results') {
