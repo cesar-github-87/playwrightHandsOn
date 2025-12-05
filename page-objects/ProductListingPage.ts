@@ -59,7 +59,7 @@ export class ProductListingPage extends helperBase{
                     counts[element] = 1;   // If new, set to 1
                 }
             }
-            console.log("Objeto regresado", counts)
+            //console.log("Objeto regresado", counts)
             return counts //Regreso el objeto llenado
           
 
@@ -119,7 +119,7 @@ export class ProductListingPage extends helperBase{
                      * NO existen o estan vacíos, me continúo al siguiente producto del ciclo FOR
                      */
                     if (!categoryText || categoryText=== '' || !name || !priceText) {
-                        console.log(`Skipping product ${i} - missing category or name`);
+                        //console.log(`Skipping product ${i} - missing category or name`);
                         continue;
                     }
                 
