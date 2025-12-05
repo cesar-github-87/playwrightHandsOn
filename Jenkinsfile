@@ -34,7 +34,7 @@ pipeline {
                         docker run --rm \
                             -v $(pwd)/playwright-report:/cnarios/playwright-report \
                             playwright-tests:${BUILD_ID} \
-                            npx playwright test --reporter=html --no-open
+                            npx playwright test --reporter=html --no-server
                         '''
                     }
                 }
