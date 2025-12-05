@@ -5,3 +5,4 @@ COPY . /cnarios/
 		
 RUN npm install --force  
 RUN npx playwright install  
+CMD ["npx", "playwright", "test", "--reporter=html", "--no-server"]
