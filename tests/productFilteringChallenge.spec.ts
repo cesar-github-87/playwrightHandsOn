@@ -42,14 +42,14 @@ test('PF_002 - Filter Products By Price Range', async({page})=>{
         const sliderBottom = page.locator('span[data-index="0"]')
         const sliderTop = page.locator('span[data-index="1"]')
 
-        console.log(await sliderBottom.getAttribute('class'))
+        //console.log(await sliderBottom.getAttribute('class'))
         await sliderBottom.hover()
         await page.mouse.down()
         await page.mouse.move(targetXBottom, 0)
         await page.mouse.up()
 
 
-        console.log(await sliderTop.getAttribute('class'))
+        //console.log(await sliderTop.getAttribute('class'))
         await sliderTop.hover()
         await page.mouse.down()
         await page.mouse.move(targetXTop, 0)
@@ -69,7 +69,7 @@ test('PF_002 - Filter Products By Price Range', async({page})=>{
 
         const lowerLimit = Number(await page.locator('span[data-index="0"]').locator('.MuiSlider-valueLabelLabel').textContent())
         const upperLimit = Number(await page.locator('span[data-index="1"]').locator('.MuiSlider-valueLabelLabel').textContent())
-        console.log('Limite inferior: ', lowerLimit, '- Upper Limit: ', upperLimit)
+       // console.log('Limite inferior: ', lowerLimit, '- Upper Limit: ', upperLimit)
 
 
         const priceString = await pm.filteringSearchPage().getProductDescription()
@@ -113,7 +113,7 @@ test('PF_003 - Filter Products by Minimum Rating', async({page})=>{
     products.forEach(element=>{
         const result =  element.split('•')
         const rating = Number(result[2].replace('⭐', '').trim())
-        console.log(rating)
+        //console.log(rating)
         expect(rating).toBeGreaterThanOrEqual(4)
     })
 
@@ -233,7 +233,7 @@ test("PF_006 - Verify Product card Details format after filtering", async({page}
         list.forEach(element=>{
             expect.soft(element.name).not.toBe("")
             const descSplit = element.desc?.split('•')
-            console.log(descSplit)
+            //console.log(descSplit)
 
             if(!descSplit){
                 throw error('No Description')

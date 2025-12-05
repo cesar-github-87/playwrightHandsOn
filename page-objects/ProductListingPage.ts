@@ -137,17 +137,17 @@ export class ProductListingPage extends helperBase{
 
                 }
             const buttonClass = await this.nextButton.getAttribute('class')
-            console.log('------------------------------')
-            console.log('CLASE DEL BOTON: ', buttonClass)
+           // console.log('------------------------------')
+            //console.log('CLASE DEL BOTON: ', buttonClass)
             const isLastPage = buttonClass?.includes("Mui-disabled");
         
             if (isLastPage) {
-               console.log('Is last Page')
+               //console.log('Is last Page')
                break;
                 
             }
             await this.page.waitForTimeout(1000);
-            console.log('Current Page":', await this.getCurrentPage())
+            //console.log('Current Page":', await this.getCurrentPage())
             await this.clickNextButton();                
             await this.page.waitForTimeout(2000);
 
@@ -230,12 +230,12 @@ export class ProductListingPage extends helperBase{
                 const isLastPage = buttonClass?.includes("Mui-disabled");//mientras no tenga el Mui-Disabled, hago lo siguiente
                 
                 if (isLastPage) {
-                    console.log('Is last Page')
+                   // console.log('Is last Page')
                     break;
                     
                 }
                 await this.page.waitForTimeout(1000);
-                console.log('Current Page":', await this.getCurrentPage())
+                //console.log('Current Page":', await this.getCurrentPage())
                 await this.clickNextButton();                
                 await this.page.waitForTimeout(2000);
                 

@@ -39,17 +39,17 @@ test('SMF_001 - Like a post and verify count + icon', async({page})=>{
         const previousLike =  Number(likesCounter?.replace("likes", '').trim())
         
         if(user=='Liam'){
-            console.log("im in")
+            //console.log("im in")
             await page.waitForTimeout(500)
             await cards.likeButton.click({force:true})
 
-            console.log('Before Like - ',Number(previousLike))            
+            ///console.log('Before Like - ',Number(previousLike))            
             likesCounter = await cards.likesText.textContent()
-            console.log( 'After Like - ',   Number(likesCounter?.replace('likes', "").trim()))
+            //console.log( 'After Like - ',   Number(likesCounter?.replace('likes', "").trim()))
             expect(Number(likesCounter?.replace('likes', "").trim())).toBe(previousLike+1)
 
             const filledHeart = await cards.likeButton.locator('svg').getAttribute('class')
-            console.log("Atributos ", filledHeart)
+            //console.log("Atributos ", filledHeart)
 
             //FALTA VERIFICAR LA CLASE
             await expect(cards.likeButton).toHaveScreenshot()
@@ -92,7 +92,7 @@ test("SMF_002 -Unlike a previously liked post ", async({page})=>{
 
     let likesText = await page.locator('.flex').locator('.MuiPaper-root.MuiPaper-rounded').locator('.MuiTypography-body1').nth(0).textContent()
     let likesNumber = Number(likesText?.replace("likes", '').trim())
-    console.log(likesNumber)
+   // console.log(likesNumber)
 
     await likedEntry.click()
     likesText = await page.locator('.flex').locator('.MuiPaper-root.MuiPaper-rounded').locator('.MuiTypography-body1').nth(0).textContent()
@@ -135,7 +135,7 @@ test("SMF_003 - Generate notification when liking a post", async({page})=>{
         return window.getComputedStyle(element).getPropertyValue('color')
     })
 
-    console.log(heartColor)
+    //console.log(heartColor)
     expect.soft(heartColor, `${heartColor} value is not correct`).toContain("211, 47, 47")
     expect.soft(await notiBell.locator(".MuiBadge-badge").textContent()).toBe('1')    
     
@@ -145,7 +145,7 @@ test("SMF_003 - Generate notification when liking a post", async({page})=>{
     heartColor = await posts[1].likeButton.locator('svg').evaluate((element)=>{
         return window.getComputedStyle(element).getPropertyValue('color')
     })
-    console.log(heartColor)
+    //console.log(heartColor)
     expect.soft(heartColor, `${heartColor} value is not correct`).toContain("0, 0, 0")
     expect.soft(await notiBell.locator(".MuiBadge-badge").textContent()).toBe('2')   
 
@@ -188,7 +188,7 @@ test("SMF004_Mark Notifications as Seen", async({page})=>{
         return window.getComputedStyle(element).getPropertyValue('color')
     })
 
-    console.log(textColor)
+    //console.log(textColor)
 
     expect(textColor).toContain("0.707 0.022 261.325")
 

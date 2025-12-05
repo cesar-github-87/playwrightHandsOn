@@ -22,7 +22,7 @@ test ("PLP_001 - Count Products in each category", async({page})=>{
     console.log("MI OBJECTO DE REFERENCIA: ", baseInfo)
     */
     Object.keys(categoryInfo).forEach(key => {
-        console.log(categoryInfo[key as keyof typeof categoryInfo]);
+       // console.log(categoryInfo[key as keyof typeof categoryInfo]);
     });
 
 
@@ -34,8 +34,8 @@ test ("PLP_001 - Count Products in each category", async({page})=>{
 
 
     const countedCategories = await pm.productListingChallengePage().countCategories()
-    console.log('Objeto referencia: ', categoryInfo)
-    console.log("Objeto leido desde pagina con mis conteos: ", countedCategories)
+   // console.log('Objeto referencia: ', categoryInfo)
+    //console.log("Objeto leido desde pagina con mis conteos: ", countedCategories)
 
 
     //SIN ADENTRARME EN MOSTRAR LAS DIFERENCIAS, COMPARO SI SOLAMENTE TIENEN LOS MISMOS VALORES Y REGRESO TRUE O FALSE
@@ -73,7 +73,7 @@ test('PLP_002- Finds specific product and identify its page', async({page})=>{
 
     let found = false
     let pageNumber
-    console.log(pageProducts.length)
+   // console.log(pageProducts.length)
 
     while(!found){
         for(let i=0; i< pageProducts.length;i++){
@@ -149,7 +149,7 @@ test('PLP_004 - Get the most expensive product in each catgory', async ({page})=
     await pm.challengesPages().goToProductListingChallenge()
     await page.waitForTimeout(1500);
     const mostPricy = await pm.productListingChallengePage().getMostExpensivePerCategory();
-    console.log(mostPricy)
+    //console.log(mostPricy)
 })
 
 test('PLP_005 - Validate pagination controls', async({page})=>{    
@@ -163,19 +163,19 @@ test('PLP_005 - Validate pagination controls', async({page})=>{
     await pm.productListingChallengePage().navigateToPageNumber(3)
 
     const listedProducts = await pm.productListingChallengePage().retrieveProducts()
-    console.log('Unsorted actual: ', await listedProducts.locator('h6.font-semibold').allTextContents())
-    console.log('Sorted actual: ', (await listedProducts.locator('h6.font-semibold').allTextContents()).sort())
+    //console.log('Unsorted actual: ', await listedProducts.locator('h6.font-semibold').allTextContents())
+    //console.log('Sorted actual: ', (await listedProducts.locator('h6.font-semibold').allTextContents()).sort())
 
     expect ((await listedProducts.locator('h6.font-semibold').allTextContents()).sort()).toEqual(expectedProducts.sort())
 
     await pm.productListingChallengePage().clickNextButton()
     let paginationButton = page.locator('.MuiPaginationItem-rounded.Mui-selected')
-    console.log("boton: ", await paginationButton.textContent())
+    //console.log("boton: ", await paginationButton.textContent())
     expect(paginationButton).toContainText("4")
 
     await pm.productListingChallengePage().clickPreviousButton()
     paginationButton = page.locator('.MuiPaginationItem-rounded.Mui-selected')
-    console.log('new boton: ',await paginationButton.textContent())
+   //console.log('new boton: ',await paginationButton.textContent())
     expect(paginationButton).toContainText("3")
 
 })
@@ -222,7 +222,7 @@ test('PLP_006 - Verify Product Card Details Format', async({page})=>{
         const isLastPage = buttonClass?.includes("Mui-disabled");
 
         if (isLastPage) {
-            console.log('Is last Page')
+            //console.log('Is last Page')
             break;
 
         }

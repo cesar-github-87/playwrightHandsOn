@@ -57,7 +57,7 @@ test("SSE_002 - Attempt to search with empty input", async ({page})=>{
 
     const resultsSection = await pm.searchEnginePage().getResults()
     expect(await resultsSection.first().isVisible()).toBeFalsy()
-    console.log(await resultsSection.count())
+   // console.log(await resultsSection.count())
 
 
 })
@@ -100,7 +100,7 @@ test("SSE_004 - Perform a second valid search after recovery", async({page})=>{
 
     for(let i =0; i<await results.count();i++){
         const title = results.nth(i).getByRole('link')
-        console.log(await title.textContent())
+       // console.log(await title.textContent())
         expect(await title.textContent()).toContain("Node.js")
     }
 
