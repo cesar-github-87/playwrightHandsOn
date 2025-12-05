@@ -81,7 +81,7 @@ test('PLP_002- Finds specific product and identify its page', async({page})=>{
             if(targetProduct === pageProducts[i]){            
                 found = true
                 pageNumber = await pm.productListingChallengePage().getCurrentPage()
-                console.log(`I've found "${targetProduct}" on page "${pageNumber}" in position "${i+1}"` )
+                //console.log(`I've found "${targetProduct}" on page "${pageNumber}" in position "${i+1}"` )
                 break
             }
         
