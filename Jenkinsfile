@@ -26,7 +26,7 @@ pipeline {
         }
         
         stage('Run Tests') {
-            paralell{
+            parallel {
                 stage('Chrome Tests'){
                     steps {
                         dir('/var/jenkins_home/workspace/PW-CNARIOS-TESTS') {
