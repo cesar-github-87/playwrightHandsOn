@@ -73,6 +73,12 @@ pipeline {
         }
         
         stage('Publish Results') {
+            when {
+                // This ensures the stage runs if the overall build is NOT ABORTED or UNSTABLE (e.g., if tests failed, but the stage didn't crash)
+                expression { currentBuild.result != 'ABORTED' } 
+                // OR simply force it to run if you expect failure, but want the report published
+                // always() 
+            }
             steps {
                 dir('/var/jenkins_home/workspace/PW-CNARIOS-TESTS') {
                     publishHTML([
