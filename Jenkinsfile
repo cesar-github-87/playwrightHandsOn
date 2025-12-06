@@ -33,7 +33,7 @@ pipeline {
                         sh '''
                         docker run --rm \
                             -e CI=true \
-                            -v $(pwd)/playwright-report:/cnarios/playwright-report \
+                            -v $(pwd)/playwright-report/chromium:/cnarios/playwright-report \
                             playwright-tests \
                             npx playwright test --project=chromium --reporter=html  # ← SIMPLE!
                         '''
@@ -46,7 +46,7 @@ pipeline {
                         sh '''
                         docker run --rm \
                             -e CI=true \
-                            -v $(pwd)/playwright-report:/cnarios/playwright-report \
+                            -v $(pwd)/playwright-report/firefox:/cnarios/playwright-report \
                             playwright-tests \
                             npx playwright test --project=firefox --reporter=html  # ← SIMPLE!
                         '''
@@ -59,7 +59,7 @@ pipeline {
                         sh '''
                         docker run --rm \
                             -e CI=true \
-                            -v $(pwd)/playwright-report:/cnarios/playwright-report \
+                            -v $(pwd)/playwright-report/webkit:/cnarios/playwright-report \
                             playwright-tests \
                             npx playwright test --project=webkit --reporter=html  # ← SIMPLE!
                         '''
@@ -76,9 +76,21 @@ pipeline {
             steps {
                 dir('/var/jenkins_home/workspace/PW-CNARIOS-TESTS') {
                     publishHTML([
-                        reportDir: 'playwright-report',
+                        reportDir: 'playwright-report/chrome',
                         reportFiles: 'index.html',
-                        reportName: 'Playwright Test Report',
+                        reportName: 'Playwright Test Report - Chrome',
+                        keepAll: true
+                    ])
+                    publishHTML([
+                        reportDir: 'playwright-report/firefox',
+                        reportFiles: 'index.html',
+                        reportName: 'Playwright Test Report - Firefox',
+                        keepAll: true
+                    ])
+                    publishHTML([
+                        reportDir: 'playwright-report/webkit',
+                        reportFiles: 'index.html',
+                        reportName: 'Playwright Test Report - Webkit',
                         keepAll: true
                     ])
                 }
