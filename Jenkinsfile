@@ -82,18 +82,24 @@ pipeline {
             steps {
                 dir('/var/jenkins_home/workspace/PW-CNARIOS-TESTS') {
                     publishHTML([
-                        reportDir: 'playwright-report/chrome',
+                        alwaysLinkToLastBuild: true, 
+                        allowMissing: true,
+                        reportDir: 'playwright-report/chromium',
                         reportFiles: 'index.html',
                         reportName: 'Playwright Test Report - Chrome',
                         keepAll: true
                     ])
                     publishHTML([
+                        alwaysLinkToLastBuild: true, 
+                        allowMissing: true,
                         reportDir: 'playwright-report/firefox',
                         reportFiles: 'index.html',
                         reportName: 'Playwright Test Report - Firefox',
                         keepAll: true
                     ])
                     publishHTML([
+                        alwaysLinkToLastBuild: true, 
+                        allowMissing: true,
                         reportDir: 'playwright-report/webkit',
                         reportFiles: 'index.html',
                         reportName: 'Playwright Test Report - Webkit',
