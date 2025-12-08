@@ -109,6 +109,3 @@ test("SSE_004 - Perform a second valid search after recovery", async({page})=>{
 })
 
 
-test.afterAll(async ({page}) => {
-  await page.close(); // Close browser after all tests
-});
