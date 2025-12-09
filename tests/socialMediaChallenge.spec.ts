@@ -221,3 +221,21 @@ test("SMF005_Like Multiple Posts Independently", async ({page})=>{
 
         
 })
+
+test("SMF006_Like Multiple Posts Independently-2", async ({page})=>{
+    /**Like the first post
+        Like the second post
+        Verify both posts show incremented counts and filled hearts
+        Verify other posts remain unaffected */
+ 
+    const pm = new PageManager(page)
+    const posts = await pm.socialMediaPages().getPostsInfo()
+   
+    let likesText = await posts[0].likesText.textContent()    
+    let number = likesText?.replace("likes", "").trim()
+ 
+    await posts[2].likeButton.click()
+    await posts[1].likeButton.click()
+ 
+       
+})
