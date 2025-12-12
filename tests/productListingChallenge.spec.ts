@@ -171,12 +171,12 @@ test('PLP_005 - Validate pagination controls', async({page})=>{
     await pm.productListingChallengePage().clickNextButton()
     let paginationButton = page.locator('.MuiPaginationItem-rounded.Mui-selected')
     //console.log("boton: ", await paginationButton.textContent())
-    expect(paginationButton).toContainText("4")
+    await expect(paginationButton).toContainText("4")
 
     await pm.productListingChallengePage().clickPreviousButton()
     paginationButton = page.locator('.MuiPaginationItem-rounded.Mui-selected')
    //console.log('new boton: ',await paginationButton.textContent())
-    expect(paginationButton).toContainText("3")
+    await expect(paginationButton).toContainText("3")
 
 })
 
