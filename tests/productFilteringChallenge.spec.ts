@@ -4,7 +4,7 @@ import { PageManager } from "../page-objects/PageManager";
 import { error } from 'console';
 
 test.beforeEach(async ({page})=> {
-    page.goto('https://www.cnarios.com/challenges')
+    await page.goto('https://www.cnarios.com/challenges')
     const pm = new PageManager(page)
     pm.challengesPages().gotoProductFilteringChallenge()
     expect(await page.locator('.MuiTypography-h4').textContent()).toBe('E-commerce Product Filtering & Search')
@@ -116,8 +116,6 @@ test('PF_003 - Filter Products by Minimum Rating', async({page})=>{
         //console.log(rating)
         expect(rating).toBeGreaterThanOrEqual(4)
     })
-
-  
 
 })
 
