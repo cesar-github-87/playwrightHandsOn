@@ -33,10 +33,9 @@ pipeline {
                         sh '''
                         docker run --rm \
                             -e CI=true \
-                            -v $(pwd):/cnarios \
-                            -w /cnarios \
+                            -v $(pwd)/playwright-report/chromium:/cnarios/playwright-report \
                             playwright-tests \
-                            npx playwright test --project=chromium --update-snapshots --reporter=html --output=/cnarios/playwright-report --config=playwright.config.ts # ← SIMPLE!
+                            npx playwright test --project=chromium --update-snapshots --reporter=html --output=/cnarios/playwright-report # ← SIMPLE!
                         '''
                         }
                     }
@@ -46,11 +45,10 @@ pipeline {
                         dir('/var/jenkins_home/workspace/PW-CNARIOS-TESTS') {
                         sh '''
                         docker run --rm \
-                            -e CI=true \
-                            -v $(pwd):/cnarios \
-                            -w /cnarios \
+                           -e CI=true \
+                            -v $(pwd)/playwright-report/firefox:/cnarios/playwright-report \
                             playwright-tests \
-                            npx playwright test --project=firefox --update-snapshots --reporter=html --output=/cnarios/playwright-report --config=playwright.config.ts # ← SIMPLE!
+                            npx playwright test --project=firefox --update-snapshots --reporter=html --output=/cnarios/playwright-report # ← SIMPLE!
                         '''
                         }
                     }
@@ -61,10 +59,9 @@ pipeline {
                         sh '''
                         docker run --rm \
                             -e CI=true \
-                            -v $(pwd):/cnarios \
-                            -w /cnarios \
+                            -v $(pwd)/playwright-report/webkit:/cnarios/playwright-report \
                             playwright-tests \
-                            npx playwright test --project=webkit --update-snapshots --reporter=html --output=/cnarios/playwright-report --config=playwright.config.ts # ← SIMPLE!
+                            npx playwright test --project=webkit --update-snapshots --reporter=html --output=/cnarios/playwright-report # ← SIMPLE!
                         '''
                         }
                     }
