@@ -33,7 +33,7 @@ pipeline {
                             sh '''
                                 docker run --rm \
                                     -e CI=true \
-                                    -v $(pwd):/cnarios \  // <--- Montaje completo para persistencia
+                                    -v $(pwd):/cnarios \  // <--- Montaje completo para persistencia 
                                     -w /cnarios \        // <--- CWD para que Playwright encuentre el config
                                     playwright-tests \
                                     npx playwright test --project=chromium --update-snapshots
