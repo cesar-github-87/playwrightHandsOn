@@ -33,7 +33,7 @@ pipeline {
                         sh '''
                         docker run --rm \
                             -e CI=true \
-                            -v $(pwd)/playwright-report/chromium:/cnarios/playwright-report \
+                            -v $(pwd):/cnarios \
                             playwright-tests \
                             npx playwright test --project=chromium --update-snapshots --reporter=html --output=/cnarios/playwright-report # ← SIMPLE!
                         '''
@@ -46,7 +46,7 @@ pipeline {
                         sh '''
                         docker run --rm \
                             -e CI=true \
-                            -v $(pwd)/playwright-report/firefox:/cnarios/playwright-report \
+                            -v $(pwd):/cnarios \
                             playwright-tests \
                             npx playwright test --project=firefox --update-snapshots --reporter=html --output=/cnarios/playwright-report # ← SIMPLE!
                         '''
@@ -59,7 +59,7 @@ pipeline {
                         sh '''
                         docker run --rm \
                             -e CI=true \
-                            -v $(pwd)/playwright-report/webkit:/cnarios/playwright-report \
+                            -v $(pwd):/cnarios \
                             playwright-tests \
                             npx playwright test --project=webkit --update-snapshots --reporter=html --output=/cnarios/playwright-report # ← SIMPLE!
                         '''
