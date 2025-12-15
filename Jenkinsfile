@@ -48,7 +48,7 @@ pipeline {
                             -e CI=true \
                             -v $(pwd)/playwright-report/firefox:/cnarios/playwright-report \
                             playwright-tests \
-                            npx playwright test --project=firefox --update-snapshots--reporter=html --output=/cnarios/playwright-report # ← SIMPLE!
+                            npx playwright test --project=firefox --update-snapshots --reporter=html --output=/cnarios/playwright-report # ← SIMPLE!
                         '''
                         }
                     }
