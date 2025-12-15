@@ -35,7 +35,7 @@ pipeline {
                             -e CI=true \
                             -v $(pwd)/playwright-report/chromium:/cnarios/playwright-report \
                             playwright-tests \
-                            npx playwright test --project=chromium --reporter=html --output=/cnarios/playwright-report # ← SIMPLE!
+                            npx playwright test --project=chromium --update-snapshots --reporter=html --output=/cnarios/playwright-report # ← SIMPLE!
                         '''
                         }
                     }
@@ -48,7 +48,7 @@ pipeline {
                             -e CI=true \
                             -v $(pwd)/playwright-report/firefox:/cnarios/playwright-report \
                             playwright-tests \
-                            npx playwright test --project=firefox --reporter=html --output=/cnarios/playwright-report # ← SIMPLE!
+                            npx playwright test --project=firefox --update-snapshots--reporter=html --output=/cnarios/playwright-report # ← SIMPLE!
                         '''
                         }
                     }
@@ -61,7 +61,7 @@ pipeline {
                             -e CI=true \
                             -v $(pwd)/playwright-report/webkit:/cnarios/playwright-report \
                             playwright-tests \
-                            npx playwright test --project=webkit --reporter=html --output=/cnarios/playwright-report # ← SIMPLE!
+                            npx playwright test --project=webkit --update-snapshots --reporter=html --output=/cnarios/playwright-report # ← SIMPLE!
                         '''
                         }
                     }
