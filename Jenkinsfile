@@ -29,40 +29,43 @@ pipeline {
             parallel {
                 stage('Chrome Tests'){
                     steps {
-                        dir('/var/jenkins_home/workspace/PW-CNARIOS-TESTS') {
-                        sh '''
-                        docker run --rm \
-                            -e CI=true \
-                            -v $(pwd)/playwright-report/chromium:/cnarios/playwright-report \
-                            playwright-tests \
-                            npx playwright test --project=chromium --update-snapshots --reporter=html --output=/cnarios/playwright-report # ← SIMPLE!
-                        '''
+                       dir('/var/jenkins_home/workspace/PW-CNARIOS-TESTS') {
+                            sh '''
+                                docker run --rm \
+                                    -e CI=true \
+                                    -v $(pwd):/cnarios \  // <--- Montaje completo para persistencia
+                                    -w /cnarios \        // <--- CWD para que Playwright encuentre el config
+                                    playwright-tests \
+                                    npx playwright test --project=chromium --update-snapshots
+                                '''
                         }
                     }
                 }
                 stage('Firefox Tests'){
                     steps {
                         dir('/var/jenkins_home/workspace/PW-CNARIOS-TESTS') {
-                        sh '''
-                        docker run --rm \
-                           -e CI=true \
-                            -v $(pwd)/playwright-report/firefox:/cnarios/playwright-report \
-                            playwright-tests \
-                            npx playwright test --project=firefox --update-snapshots --reporter=html --output=/cnarios/playwright-report # ← SIMPLE!
-                        '''
+                            sh '''
+                                docker run --rm \
+                                    -e CI=true \
+                                    -v $(pwd):/cnarios \  // <--- Montaje completo para persistencia
+                                    -w /cnarios \        // <--- CWD para que Playwright encuentre el config
+                                    playwright-tests \
+                                    npx playwright test --project=firefox --update-snapshots
+                                '''
                         }
                     }
                 }
                 stage('Webkit Tests'){
                     steps {
-                        dir('/var/jenkins_home/workspace/PW-CNARIOS-TESTS') {
-                        sh '''
-                        docker run --rm \
-                            -e CI=true \
-                            -v $(pwd)/playwright-report/webkit:/cnarios/playwright-report \
-                            playwright-tests \
-                            npx playwright test --project=webkit --update-snapshots --reporter=html --output=/cnarios/playwright-report # ← SIMPLE!
-                        '''
+                       dir('/var/jenkins_home/workspace/PW-CNARIOS-TESTS') {
+                            sh '''
+                                docker run --rm \
+                                    -e CI=true \
+                                    -v $(pwd):/cnarios \  // <--- Montaje completo para persistencia
+                                    -w /cnarios \        // <--- CWD para que Playwright encuentre el config
+                                    playwright-tests \
+                                    npx playwright test --project=fwebkit --update-snapshots
+                                '''
                         }
                     }
                 }
