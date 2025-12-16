@@ -33,9 +33,9 @@ pipeline {
                             sh 'chmod -R a+rX .'
                             sh '''
                                 docker run --rm \
-                                    -e CI=true \
-                                    -v $(pwd):/cnarios \
-                                    -w /cnarios \
+                                    -e CI=true \                                    
+                                    -v jenkins_data:/var/jenkins_home \
+                                    -w /var/jenkins_home/workspace/PW-CNARIOS-TESTS \
                                     playwright-tests \
                                     npx playwright test --project=chromium --update-snapshots --config=playwright.config.ts
                                 '''
@@ -49,8 +49,8 @@ pipeline {
                             sh '''
                                 docker run --rm \
                                     -e CI=true \
-                                    -v $(pwd):/cnarios \
-                                    -w /cnarios \
+                                    -v jenkins_data:/var/jenkins_home \
+                                    -w /var/jenkins_home/workspace/PW-CNARIOS-TESTS \
                                     playwright-tests \
                                     npx playwright test --project=firefox --update-snapshots --config=playwright.config.ts
                                 '''
@@ -64,8 +64,8 @@ pipeline {
                             sh '''
                                 docker run --rm \
                                     -e CI=true \
-                                    -v $(pwd):/cnarios \
-                                    -w /cnarios \
+                                    -v jenkins_data:/var/jenkins_home \
+                                    -w /var/jenkins_home/workspace/PW-CNARIOS-TESTS \
                                     playwright-tests \
                                     npx playwright test --project=webkit --update-snapshots --config=playwright.config.ts
                                 '''
