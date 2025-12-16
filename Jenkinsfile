@@ -33,8 +33,8 @@ pipeline {
                             sh '''
                                 docker run --rm \
                                     -e CI=true \
-                                    -v $(pwd):/cnarios \  // <--- Montaje completo para persistencia 
-                                    -w /cnarios \        // <--- CWD para que Playwright encuentre el config
+                                    -v $(pwd):/cnarios \
+                                    -w /cnarios \
                                     playwright-tests \
                                     npx playwright test --project=chromium --update-snapshots
                                 '''
@@ -47,8 +47,8 @@ pipeline {
                             sh '''
                                 docker run --rm \
                                     -e CI=true \
-                                    -v $(pwd):/cnarios \  // <--- Montaje completo para persistencia
-                                    -w /cnarios \        // <--- CWD para que Playwright encuentre el config
+                                    -v $(pwd):/cnarios \
+                                    -w /cnarios \
                                     playwright-tests \
                                     npx playwright test --project=firefox --update-snapshots
                                 '''
@@ -61,10 +61,10 @@ pipeline {
                             sh '''
                                 docker run --rm \
                                     -e CI=true \
-                                    -v $(pwd):/cnarios \  // <--- Montaje completo para persistencia
-                                    -w /cnarios \        // <--- CWD para que Playwright encuentre el config
+                                    -v $(pwd):/cnarios \
+                                    -w /cnarios \
                                     playwright-tests \
-                                    npx playwright test --project=fwebkit --update-snapshots
+                                    npx playwright test --project=webkit --update-snapshots
                                 '''
                         }
                     }
