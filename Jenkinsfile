@@ -33,7 +33,7 @@ pipeline {
                             sh 'chmod -R a+rX .'
                             sh '''
                                 docker run --rm \
-                                    -e CI=true \                                    
+                                    -e CI=true \
                                     -v jenkins_data:/var/jenkins_home \
                                     -w /var/jenkins_home/workspace/PW-CNARIOS-TESTS \
                                     playwright-tests \
