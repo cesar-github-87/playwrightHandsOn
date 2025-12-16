@@ -37,7 +37,7 @@ pipeline {
                                     -v $(pwd):/cnarios \
                                     -w /cnarios \
                                     playwright-tests \
-                                    npx playwright test --project=chromium --update-snapshots
+                                    npx playwright test --project=chromium --update-snapshots --config=playwright.config.ts
                                 '''
                         }
                     }
@@ -52,7 +52,7 @@ pipeline {
                                     -v $(pwd):/cnarios \
                                     -w /cnarios \
                                     playwright-tests \
-                                    npx playwright test --project=firefox --update-snapshots
+                                    npx playwright test --project=firefox --update-snapshots --config=playwright.config.ts
                                 '''
                         }
                     }
@@ -67,7 +67,7 @@ pipeline {
                                     -v $(pwd):/cnarios \
                                     -w /cnarios \
                                     playwright-tests \
-                                    npx playwright test --project=webkit --update-snapshots
+                                    npx playwright test --project=webkit --update-snapshots --config=playwright.config.ts
                                 '''
                         }
                     }
