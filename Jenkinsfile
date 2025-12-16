@@ -17,7 +17,7 @@ pipeline {
             }
         }
         
-        stage('Build Docker Image') {
+        stage('Build Docker Images') {
             steps {
                 dir('/var/jenkins_home/workspace/PW-CNARIOS-TESTS') {
                     sh 'docker build -t playwright-tests .'
