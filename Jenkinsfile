@@ -33,11 +33,11 @@ pipeline {
                             sh 'chmod -R a+rX .'
                             sh '''
                                 docker run --rm \
-                                    -e CI=true \
-                                    -v jenkins_data:/var/jenkins_home \
-                                    -w /var/jenkins_home/workspace/PW-CNARIOS-TESTS \
-                                    playwright-tests \
-                                    npx playwright test --project=chromium --update-snapshots --config=playwright.config.ts
+                            -e CI=true \
+                            -v /c/Users/cesar/Playwright/PW-CNARIOS-TESTS:/cnarios \
+                            -w /cnarios \
+                            playwright-tests \
+                            npx playwright test --project=chromium --update-snapshots
                                 '''
                         }
                     }
@@ -48,11 +48,11 @@ pipeline {
                             sh 'chmod -R a+rX .'
                             sh '''
                                 docker run --rm \
-                                    -e CI=true \
-                                    -v jenkins_data:/var/jenkins_home \
-                                    -w /var/jenkins_home/workspace/PW-CNARIOS-TESTS \
-                                    playwright-tests \
-                                    npx playwright test --project=firefox --update-snapshots --config=playwright.config.ts
+                            -e CI=true \
+                            -v /c/Users/cesar/Playwright/PW-CNARIOS-TESTS:/cnarios \
+                            -w /cnarios \
+                            playwright-tests \
+                            npx playwright test --project=firefox --update-snapshots
                                 '''
                         }
                     }
@@ -63,11 +63,11 @@ pipeline {
                             sh 'chmod -R a+rX .'
                             sh '''
                                 docker run --rm \
-                                    -e CI=true \
-                                    -v jenkins_data:/var/jenkins_home \
-                                    -w /var/jenkins_home/workspace/PW-CNARIOS-TESTS \
-                                    playwright-tests \
-                                    npx playwright test --project=webkit --update-snapshots --config=playwright.config.ts
+                            -e CI=true \
+                            -v /c/Users/cesar/Playwright/PW-CNARIOS-TESTS:/cnarios \
+                            -w /cnarios \
+                            playwright-tests \
+                            npx playwright test --project=webkit --update-snapshots
                                 '''
                         }
                     }
