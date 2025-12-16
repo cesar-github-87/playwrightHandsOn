@@ -30,6 +30,7 @@ pipeline {
                 stage('Chrome Tests'){
                     steps {
                        dir('/var/jenkins_home/workspace/PW-CNARIOS-TESTS') {
+                            sh 'chmod -R a+rX .'
                             sh '''
                                 docker run --rm \
                                     -e CI=true \
@@ -44,6 +45,7 @@ pipeline {
                 stage('Firefox Tests'){
                     steps {
                         dir('/var/jenkins_home/workspace/PW-CNARIOS-TESTS') {
+                            sh 'chmod -R a+rX .'
                             sh '''
                                 docker run --rm \
                                     -e CI=true \
@@ -58,6 +60,7 @@ pipeline {
                 stage('Webkit Tests'){
                     steps {
                        dir('/var/jenkins_home/workspace/PW-CNARIOS-TESTS') {
+                            sh 'chmod -R a+rX .'
                             sh '''
                                 docker run --rm \
                                     -e CI=true \
