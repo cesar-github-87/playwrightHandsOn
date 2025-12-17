@@ -62,8 +62,7 @@ export class ChallengesPage extends helperBase{
         await jobAppChallenge.getByRole('button', {name:'View Challenge'}).click();   
     }
 
-    //Just Checking
-
+  
 
 
 }

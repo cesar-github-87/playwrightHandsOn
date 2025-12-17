@@ -9,6 +9,7 @@ import { LoginPage } from "./loginChallengePage";
 import { FilterSearchPage } from "./filterSearchPage";
 import { SocialMedia} from "./socialMediaPage";
 import { SearchEngine } from "./SearchEnginePage";
+import {JobApplication} from "./JobApplication";
 
 
 
@@ -22,6 +23,7 @@ export class PageManager{
     private readonly filteringPage: FilterSearchPage
     private readonly socialMediaPage: SocialMedia;
     private readonly simpleSearchEnginePage: SearchEngine;
+    private readonly jobApplicationPage: JobApplication
 
     constructor(page:Page){
         this.page = page;
@@ -32,6 +34,7 @@ export class PageManager{
         this.filteringPage = new FilterSearchPage(this.page);
         this.socialMediaPage = new SocialMedia(this.page);
         this.simpleSearchEnginePage =  new SearchEngine(this.page);
+        this.jobApplicationPage =  new JobApplication(this.page);
 
     }
 
@@ -63,6 +66,9 @@ export class PageManager{
     searchEnginePage(){
         return this.simpleSearchEnginePage;
     }
-
+    
+    jobPage(){
+        return this.jobApplicationPage;
+    }
 }
 
