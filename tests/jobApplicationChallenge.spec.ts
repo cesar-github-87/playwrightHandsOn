@@ -28,6 +28,7 @@ test("JAF_001", async ({page})=>{
     const roles = await pm.jobPage().getJobRoles()
 
     //console.log(await roles.allTextContents())
+    //new comment
 
     await page.locator('.MuiMenu-list li').nth(1).click()
     await page.locator('.MuiMenu-list li').nth(3).click()
@@ -38,7 +39,7 @@ test("JAF_001", async ({page})=>{
     await pm.jobPage().selectRating(7)
 
     await pm.jobPage().selectDate("2026-11-30")
-    await pm.jobPage().selectTime('09:25')
+    await pm.jobPage().selectTime('23:25')
     await pm.jobPage().selectTerms()
     await pm.jobPage().enterSkills(["manager", "qa"])
     await page.getByRole('button', {name:'Submit'}).click()

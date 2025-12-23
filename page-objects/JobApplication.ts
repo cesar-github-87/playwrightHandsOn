@@ -59,6 +59,7 @@ export class JobApplication extends helperBase{
     async selectRating(value:number){
         const sliderBox = this.page.locator('.MuiSlider-root')
         const sliderCoordinates = await sliderBox.boundingBox()
+        console.log(sliderCoordinates)
 
         if (!sliderCoordinates) {
             throw error("Slider NOT AVAILABLE")
@@ -66,7 +67,7 @@ export class JobApplication extends helperBase{
 
 
         let targetX = sliderCoordinates.x + (sliderCoordinates.width * (value*.1))
-        
+        console.log('target ',targetX)
         
         const slider = this.page.locator('span[data-index="0"]')
       
