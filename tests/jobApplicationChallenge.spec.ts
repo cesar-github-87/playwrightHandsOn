@@ -50,3 +50,12 @@ test("JAF_001", async ({page})=>{
 
 })
 
+test("JAF_002_Attempt_invalid_eMail", async ({page})=>{
+    const pm = new PageManager(page)
+    await pm.jobPage().fillPersonalFields("Mr.", "Cesarp", "Barragan", "cesr213@gmai", "3333333334", "Female", "English")
+    console.log(await page.locator('p[id*= "-helper-text"]').textContent())
+
+    expect(await page.locator('p[id*= "-helper-text"]').textContent()).toBe("Enter a valid email")
+
+}) 
+
