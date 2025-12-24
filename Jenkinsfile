@@ -86,6 +86,20 @@ pipeline {
                 // always() 
             }
             steps {
+                // No es necesario usar dir() con la ruta absoluta si ya estás en el workspace
+                 publishHTML([
+                    alwaysLinkToLastBuild: true, 
+                    allowMissing: false, // Cámbialo a false para que Jenkins te avise si el reporte no se generó
+                    reportDir: 'playwright-report', // Apunta a la raíz, donde está el index.html
+                    reportFiles: 'index.html',
+                    reportName: 'Playwright Full Test Report',
+                    keepAll: true
+                ])
+        
+                // También procesamos el XML para activar el menú "Test Result"
+                junit 'results.xml'
+            }       
+                /*
                 dir('/var/jenkins_home/workspace/PW-CNARIOS-TESTS') {
                     publishHTML([
                         alwaysLinkToLastBuild: true, 
@@ -111,8 +125,8 @@ pipeline {
                         reportName: 'Playwright Test Report - Webkit',
                         keepAll: true
                     ])
-                }
-            }
+                }*/
+            
         }
     }
     

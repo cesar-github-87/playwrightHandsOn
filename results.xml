@@ -1,0 +1,85 @@
+<testsuites id="" name="" tests="29" failures="0" skipped="0" errors="0" time="310.917347">
+<testsuite name="e2eChallenge.spec.ts" timestamp="2025-12-24T22:34:03.328Z" hostname="webkit" tests="1" failures="0" skipped="0" time="9.331" errors="0">
+<testcase name="Into e2e Challenge page" classname="e2eChallenge.spec.ts" time="9.331">
+</testcase>
+</testsuite>
+<testsuite name="jobApplicationChallenge.spec.ts" timestamp="2025-12-24T22:34:03.328Z" hostname="webkit" tests="2" failures="0" skipped="0" time="21.539" errors="0">
+<testcase name="JAF_001" classname="jobApplicationChallenge.spec.ts" time="15.556">
+<system-out>
+<![CDATA[{ x: [33m216[39m, y: [33m454[39m, width: [33m848[39m, height: [33m30[39m }
+target  [33m809.6[39m
+manager
+qa
+]]>
+</system-out>
+</testcase>
+<testcase name="JAF_002_Attempt_invalid_eMail" classname="jobApplicationChallenge.spec.ts" time="5.983">
+<system-out>
+<![CDATA[Enter a valid email
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="productFilteringChallenge.spec.ts" timestamp="2025-12-24T22:34:03.328Z" hostname="webkit" tests="6" failures="0" skipped="0" time="47.474" errors="0">
+<testcase name="PF_001 - Filter Products by Category" classname="productFilteringChallenge.spec.ts" time="8.007">
+</testcase>
+<testcase name="PF_002 - Filter Products By Price Range" classname="productFilteringChallenge.spec.ts" time="7.852">
+</testcase>
+<testcase name="PF_003 - Filter Products by Minimum Rating" classname="productFilteringChallenge.spec.ts" time="4.748">
+</testcase>
+<testcase name="PF_004 - Show only in-stock products" classname="productFilteringChallenge.spec.ts" time="7.583">
+</testcase>
+<testcase name="PF_005 - Reset Filters" classname="productFilteringChallenge.spec.ts" time="11.431">
+</testcase>
+<testcase name="PF_006 - Verify Product card Details format after filtering" classname="productFilteringChallenge.spec.ts" time="7.853">
+</testcase>
+</testsuite>
+<testsuite name="productListingChallenge.spec.ts" timestamp="2025-12-24T22:34:03.328Z" hostname="webkit" tests="6" failures="0" skipped="0" time="99.85" errors="0">
+<testcase name="PLP_001 - Count Products in each category" classname="productListingChallenge.spec.ts" time="16.217">
+</testcase>
+<testcase name="PLP_002- Finds specific product and identify its page" classname="productListingChallenge.spec.ts" time="10.878">
+</testcase>
+<testcase name="PLP_003 - Find the Highest-rated product in each category" classname="productListingChallenge.spec.ts" time="19.88">
+</testcase>
+<testcase name="PLP_004 - Get the most expensive product in each catgory" classname="productListingChallenge.spec.ts" time="20.31">
+</testcase>
+<testcase name="PLP_005 - Validate pagination controls" classname="productListingChallenge.spec.ts" time="12.235">
+</testcase>
+<testcase name="PLP_006 - Verify Product Card Details Format" classname="productListingChallenge.spec.ts" time="20.33">
+</testcase>
+</testsuite>
+<testsuite name="roleLoginChallenge.spec.ts" timestamp="2025-12-24T22:34:03.328Z" hostname="webkit" tests="4" failures="0" skipped="0" time="46.446" errors="0">
+<testcase name="LF_001 - Empty fields validation" classname="roleLoginChallenge.spec.ts" time="23.166">
+</testcase>
+<testcase name="LF_002 - Invalid Credentials" classname="roleLoginChallenge.spec.ts" time="6.584">
+</testcase>
+<testcase name="Login scenarios › LF_003 - Login as User" classname="roleLoginChallenge.spec.ts" time="8.422">
+</testcase>
+<testcase name="Login scenarios › LF_004 - Login as Admin" classname="roleLoginChallenge.spec.ts" time="8.274">
+</testcase>
+</testsuite>
+<testsuite name="simpleSearchChallenge.spec.ts" timestamp="2025-12-24T22:34:03.328Z" hostname="webkit" tests="4" failures="0" skipped="0" time="22.614" errors="0">
+<testcase name="SSE_001 - Perform a valid search and verify Results " classname="simpleSearchChallenge.spec.ts" time="6.405">
+</testcase>
+<testcase name="SSE_002 - Attempt to search with empty input" classname="simpleSearchChallenge.spec.ts" time="4.887">
+</testcase>
+<testcase name="SSE_003 - Re-use old search input after re-render (Stale Element Exception)" classname="simpleSearchChallenge.spec.ts" time="5.141">
+</testcase>
+<testcase name="SSE_004 - Perform a second valid search after recovery" classname="simpleSearchChallenge.spec.ts" time="6.181">
+</testcase>
+</testsuite>
+<testsuite name="socialMediaChallenge.spec.ts" timestamp="2025-12-24T22:34:03.328Z" hostname="webkit" tests="6" failures="0" skipped="0" time="32.611" errors="0">
+<testcase name="SMF_001 - Like a post and verify count + icon" classname="socialMediaChallenge.spec.ts" time="5.129">
+</testcase>
+<testcase name="SMF_002 -Unlike a previously liked post " classname="socialMediaChallenge.spec.ts" time="6.073">
+</testcase>
+<testcase name="SMF_003 - Generate notification when liking a post" classname="socialMediaChallenge.spec.ts" time="4.618">
+</testcase>
+<testcase name="SMF004_Mark Notifications as Seen" classname="socialMediaChallenge.spec.ts" time="6.72">
+</testcase>
+<testcase name="SMF005_Like Multiple Posts Independently" classname="socialMediaChallenge.spec.ts" time="4.619">
+</testcase>
+<testcase name="SMF006_Like Multiple Posts Independently-2" classname="socialMediaChallenge.spec.ts" time="5.452">
+</testcase>
+</testsuite>
+</testsuites>
